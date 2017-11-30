@@ -22,3 +22,16 @@ functionLoop$:
 	lsl r1, r2
 	str r1, [r0]
 	pop {pc}
+
+.globl SetGpio
+SetGpio:
+	pinNum .req r0
+	pinVal .req r1
+	cmp pinNum, #53
+	movhi pc, lr
+	push {lr}
+	mov r2, pinNum
+	.unreq pinNum
+	pinNum .req r2
+	bl GetGpioAddress
+	gpioAddr .req r0
