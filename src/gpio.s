@@ -34,3 +34,8 @@ SetGpio:
 	pinNum .req r2
 	bl GetGpioAddress
 	gpioAddr .req r0
+	pinBank .req r3
+	lsr pinBank, pinNum, #5
+	lsl pinBank, #2
+	add gpioAddr, pinBank
+	.unreq pinBank
